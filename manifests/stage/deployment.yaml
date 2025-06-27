@@ -19,7 +19,7 @@ spec:
       serviceAccountName: demo-app-sa  # Must have access to Secret Manager
       containers:
         - name: test-app
-          image: asia-south1-docker.pkg.dev/praveen-345/python-app/python-app:v1-56c85ae-20250627145539
+          image: asia-south1-docker.pkg.dev/praveen-345/python-app/python-app:v1-b158e28-20250627151504
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
