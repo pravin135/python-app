@@ -10,7 +10,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: test-app2
+      app: test-app3
   template:
     metadata:
       labels:
