@@ -5,7 +5,7 @@ metadata:
   name: test-app
   namespace: app
   labels:
-    app: test-app
+    app: test-app1
 spec:
   replicas: 1
   selector:
