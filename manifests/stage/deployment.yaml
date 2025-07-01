@@ -70,8 +70,8 @@ spec:
   provider: gke
   parameters:
     secrets: |
-      - resourceName: "projects/gke-arena/secrets/MYSQL_DATABASE/versions/latest"
+      - resourceName: "projects/915484313024/secrets/MYSQL_DATABASE/versions/latest"
         path: "MYSQL_DATABASE"
-      - resourceName: "projects/gke-arena/secrets/MYSQL_ROOT_PASSWORD/versions/latest"
+      - resourceName: "projects/915484313024/secrets/MYSQL_ROOT_PASSWORD/versions/latest"
         path: "MYSQL_ROOT_PASSWORD"
 ---
