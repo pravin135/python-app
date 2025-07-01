@@ -1,9 +1,11 @@
 import os
+import signal
+import sys
 from flask import Flask, request
 import MySQLdb
 
 app = Flask(__name__)
-conn = ""
+conn = None
 
 def get_db_conn():
     global conn
@@ -19,12 +21,7 @@ def get_db_conn():
 def db_init():
     global conn
     try:
-        conn = MySQLdb.connect(
-            host=os.getenv("DB_HOST"),
-            user=os.getenv("DB_USER"),
-            passwd=os.getenv("DB_PASSWORD"),
-            db=os.getenv("DB_NAME")
-        )
+        conn = get_db_conn()
         cur = conn.cursor()
         cur.execute("show tables like 'employee'")
         if not cur.rowcount:
@@ -34,6 +31,21 @@ def db_init():
             print("Database table already present")
     except Exception as msg:
         print("Exception while initializing database : %s" % msg)
+
+def shutdown_handler(signum, frame):
+    print(f"Received termination signal: {signum}. Cleaning up...")
+    global conn
+    try:
+        if conn and conn.open:
+            conn.close()
+            print("Database connection closed.")
+    except Exception as e:
+        print(f"Error closing DB connection: {e}")
+    sys.exit(0)
+
+# Register signal handlers
+signal.signal(signal.SIGTERM, shutdown_handler)
+signal.signal(signal.SIGINT, shutdown_handler)
 
 @app.route('/')
 def greet():
