@@ -16,6 +16,7 @@ spec:
       labels:
         app: test-app
     spec:
+      terminationGracePeriodSeconds: 60
       serviceAccountName: demo-app-sa  # Must have access to Secret Manager
       containers:
         - name: test-app
